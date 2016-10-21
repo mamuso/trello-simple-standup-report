@@ -3,7 +3,22 @@ require 'trello'
 require 'slack-notifier'
 
 namespace :trello do
-  desc 'Extract Trello Cards to post a standup to a '
+  desc 'Call for standup in all the channesl you have configured as output'
+  task :callforstandup do
+
+    # Load the .env file if exists
+    Dotenv.load
+
+    # Posting to slack if it is configured
+    if ENV['SLACK_WEBHOOK_URL']
+
+      notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
+      notifier.ping "Howdy <@channel>! Go to https://trello.com/b/#{ENV['TRELLO_STANDUP_BOARD_ID']} and update your tasks. I'll be picking them up very soon :robot_face:"
+
+    end
+  end
+
+  desc 'Extract Trello Cards and post it to one or many channels'
   task :standup do
 
     # Load the .env file if exists
@@ -85,8 +100,6 @@ namespace :trello do
       notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
       notifier.ping message
 
-
     end
-
   end
 end
