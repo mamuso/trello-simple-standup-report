@@ -13,3 +13,4 @@ VARIABLE |  |
 `TRELLO_DEVELOPER_PUBLIC_KEY` | Check [ruby-trello](https://github.com/jeremytregunna/ruby-trello)
 `TRELLO_MEMBER_TOKEN` | Check [ruby-trello](https://github.com/jeremytregunna/ruby-trello)
 `TRELLO_STANDUP_BOARD_ID` | ![board id](assets/TRELLO_STANDUP_BOARD_ID.png)
+`SLACK_WEBHOOK_URL` | Check [slack-notifier](https://github.com/stevenosloan/slack-notifier)

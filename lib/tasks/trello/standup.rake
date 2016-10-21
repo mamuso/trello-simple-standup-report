@@ -35,15 +35,15 @@ namespace :trello do
     standupBoard.lists.each do |list|
       unless list.closed? || list.cards.size == 0
         cards = list.cards
-        message += "# #{list.name}\n"
+        message += "*#{list.name}*\n"
 
         # Find all the cards labeled as "Yesterday"
         yesterdayCards = cards.select {|card| card.card_labels.include? labelYesterday } unless labelYesterday.nil?
 
         if yesterdayCards.size > 0 
-          message += "** What did you do yesterday? **\n"
+          message += "What did you do yesterday?\n"
           yesterdayCards.each do |card|
-            message += "- #{card.name}\n"
+            message += "> #{card.name}\n"
           end
           message += "\n"
         end
@@ -53,9 +53,9 @@ namespace :trello do
         todayCards = cards.select {|card| card.card_labels.include? labelToday } unless labelToday.nil?
 
         if todayCards.size > 0 
-          message += "** What are you doing today? **\n"
+          message += "What are you doing today?\n"
           todayCards.each do |card|
-            message += "- #{card.name} #{ card.comments.first ? ': '+card.comments.first.text : '' }\n"
+            message += "> #{card.name} #{ card.comments.first ? ': '+card.comments.first.text : '' }\n"
           end
           message += "\n"
         end
@@ -65,9 +65,9 @@ namespace :trello do
         blockersCards = cards.select {|card| card.card_labels.include? labelBlocked } unless labelBlocked.nil?
 
         if blockersCards.size > 0 
-          message += "\n** What is blocking you? **\n"
+          message += "\nWhat is blocking you?\n"
           blockersCards.each do |card|
-            message += "- #{card.name}\n"
+            message += "> #{card.name}\n"
           end
           message += "\n"
         end
@@ -79,6 +79,14 @@ namespace :trello do
 
     # We have the text! let's deliver the message
     
+    # Posting to slack if it is configured
+    if ENV['SLACK_WEBHOOK_URL']
+
+      notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
+      notifier.ping message
+
+
+    end
 
   end
 end
