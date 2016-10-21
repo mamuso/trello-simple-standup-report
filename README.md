@@ -8,7 +8,7 @@ We use [ruby-trello](https://github.com/jeremytregunna/ruby-trello), follow the 
 
 If you want to post your messages to slack, you are going to need to configure a webhook. We use the gem [slack-notifier](https://github.com/stevenosloan/slack-notifier), take a look to their documentation for detailed instructions.
 
-ENV VARIABLE | 
+ENV VARIABLE |  |
 ------------ | -------------
 `TRELLO_DEVELOPER_PUBLIC_KEY` | Check [ruby-trello](https://github.com/jeremytregunna/ruby-trello)
 `TRELLO_MEMBER_TOKEN` | Check [ruby-trello](https://github.com/jeremytregunna/ruby-trello)
