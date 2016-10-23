@@ -13,7 +13,7 @@ namespace :trello do
     if ENV['SLACK_WEBHOOK_URL']
 
       notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
-      notifier.ping "Howdy <@channel>! Go to https://trello.com/b/#{ENV['TRELLO_STANDUP_BOARD_ID']} and update your tasks. I'll be picking them up very soon :robot_face:"
+      notifier.ping "Howdy <!channel>! Go to https://trello.com/b/#{ENV['TRELLO_STANDUP_BOARD_ID']} and update your tasks. I'll be picking them up very soon :robot_face:"
 
     end
   end
