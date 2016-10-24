@@ -20,7 +20,7 @@ VARIABLE |  |
 `YAMMER_GROUP` | ![group id](assets/YAMMER_GROUP_ID.png)
 `YAMMER_ANNOUNCE` | Boolean - Do you want to post the standup announcement on Yammer?
 
-You can define all this environment variables the way you want, although we use [dotenv](https://github.com/bkeepers/dotenv).
+You can define all this environment variables the way you want, for our develompment environment we use [dotenv](https://github.com/bkeepers/dotenv).
 
 ## Deploying the app to Heroku
 If you want to make this work in Heroku, you'll need to define the variables in your control panel.
@@ -32,3 +32,4 @@ You'll need to schedule one or two tasks, depending if you want to call for the 
 - `rake trello:standup` for collecting the data from the board and posting it.
 
 ![Scheduler](assets/heroku-scheduler.png)
+
