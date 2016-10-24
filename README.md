@@ -10,6 +10,11 @@ Define labels for `Yesterday`, `Today` and `Blockers`
 
 ![Trello labels](assets/labels.png)
 
+Every person can add their tasks, labeling them properly.
+
+![Trello tasks](assets/tasks.png)
+
+
 ## Configuration
 We use [ruby-trello](https://github.com/jeremytregunna/ruby-trello), follow the instructions they provide to get the API key information you need to make this work. 
 
