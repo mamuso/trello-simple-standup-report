@@ -1,4 +1,5 @@
 require 'dotenv'
+require 'net/http'
 require 'trello'
 require 'slack-notifier'
 
@@ -11,12 +12,33 @@ namespace :trello do
       Dotenv.load
 
       # Posting to slack if it is configured
-      if ENV['SLACK_WEBHOOK_URL']
+      if ENV['SLACK_WEBHOOK_URL'] && ENV['SLACK_ANNOUNCE'] == "true"
 
-        notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
-        notifier.ping "Howdy <!channel>! Go to https://trello.com/b/#{ENV['TRELLO_STANDUP_BOARD_ID']} and update your tasks. I'll be picking them up very soon :robot_face:"
+        # notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
+        # notifier.ping "Howdy <!channel>! Go to https://trello.com/b/#{ENV['TRELLO_STANDUP_BOARD_ID']} and update your tasks. I'll be picking them up very soon :robot_face:"
 
       end
+
+      # Posting to yammer if it is configured
+      if ENV['YAMMER_TOKEN'] && ENV['YAMMER_ANNOUNCE'] == "true"
+
+        yammer_message = "Howdy Group! Go to https://trello.com/b/#{ENV['TRELLO_STANDUP_BOARD_ID']} and update your tasks. I'll be picking them up very soon 🤖"
+
+        uri = URI.parse("https://www.yammer.com/api/v1/messages.json")
+
+        # Full control
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+        request = Net::HTTP::Post.new(uri.request_uri)
+        request.set_form_data({'group_id' => '9593962', 'body' => yammer_message})
+        request['Authorization'] = 'Bearer 107-lGe4tdVBlpIIy0wfwkIu5Q'
+
+        response = http.request(request)
+
+      end
+
     end
   end
 
@@ -89,8 +111,7 @@ namespace :trello do
             end
             message += "\n"
           end
-
-          message += "\n"
+          message += "\n\n"
         end
 
       end
@@ -104,6 +125,28 @@ namespace :trello do
         notifier.ping message
 
       end
+
+      # Posting to yammer if it is configured
+      if ENV['YAMMER_TOKEN']
+
+        # some make up for the yammer message
+        yammer_message = message.gsub(/\*(.+?)\*/) { $1.upcase }
+
+        uri = URI.parse("https://www.yammer.com/api/v1/messages.json")
+
+        # Full control
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+        request = Net::HTTP::Post.new(uri.request_uri)
+        request.set_form_data({'group_id' => '9593962', 'body' => yammer_message})
+        request['Authorization'] = 'Bearer 107-lGe4tdVBlpIIy0wfwkIu5Q'
+
+        response = http.request(request)
+
+      end
+
     end
   end
 end
