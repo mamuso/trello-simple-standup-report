@@ -1,8 +1,14 @@
 # trello-simple-standup-report
-Experimenting with an asynchronous standup model, using Trello as a base. The initial implementation supports only Trello to Slack.
+Experimenting with an asynchronous standup model, using Trello as a base. The initial implementation supports only Trello to Slack and Yammer.
 
 ## How it works
-In a Trello board, make a list per person 
+In a Trello board, make a list per person.
+
+![Trello board](assets/board.png)
+
+Define labels for `Yesterday`, `Today` and `Blockers`
+
+![Trello labels](assets/labels.png)
 
 ## Configuration
 We use [ruby-trello](https://github.com/jeremytregunna/ruby-trello), follow the instructions they provide to get the API key information you need to make this work. 
