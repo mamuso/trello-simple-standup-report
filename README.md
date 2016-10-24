@@ -2,7 +2,7 @@
 Experimenting with an asynchronous standup model, using Trello as a base. The initial implementation supports only Trello to Slack and Yammer.
 
 ## How it works
-In a Trello board, make a list per person.
+In a Trello board, make a list per person. Add the <@slack_id> if you want to notify people on slack as you post the message.
 
 ![Trello board](assets/board.png)
 
@@ -14,6 +14,13 @@ Every person can add their tasks, labeling them properly.
 
 ![Trello tasks](assets/tasks.png)
 
+You can add more detail to the tasks "Today" by adding comments. The task will render the last comment of the card.
+
+![Trello comments](assets/comments.png)
+
+The output will be something like this:
+
+![Output](assets/output-slack.png)
 
 ## Configuration
 We use [ruby-trello](https://github.com/jeremytregunna/ruby-trello), follow the instructions they provide to get the API key information you need to make this work. 
