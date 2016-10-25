@@ -32,8 +32,8 @@ namespace :trello do
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
         request = Net::HTTP::Post.new(uri.request_uri)
-        request.set_form_data({'group_id' => '9593962', 'body' => yammer_message})
-        request['Authorization'] = 'Bearer 107-lGe4tdVBlpIIy0wfwkIu5Q'
+        request.set_form_data({'group_id' => ENV['YAMMER_GROUP'], 'body' => yammer_message})
+        request['Authorization'] = "Bearer #{ENV['YAMMER_TOKEN']}"
 
         response = http.request(request)
 
@@ -140,8 +140,8 @@ namespace :trello do
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
         request = Net::HTTP::Post.new(uri.request_uri)
-        request.set_form_data({'group_id' => '9593962', 'body' => yammer_message})
-        request['Authorization'] = 'Bearer 107-lGe4tdVBlpIIy0wfwkIu5Q'
+        request.set_form_data({'group_id' => ENV['YAMMER_GROUP'], 'body' => yammer_message})
+        request['Authorization'] = "Bearer #{ENV['YAMMER_TOKEN']}"
 
         response = http.request(request)
 
