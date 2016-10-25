@@ -14,8 +14,8 @@ namespace :trello do
       # Posting to slack if it is configured
       if ENV['SLACK_WEBHOOK_URL'] && ENV['SLACK_ANNOUNCE'] == "true"
 
-        # notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
-        # notifier.ping "Howdy <!channel>! Go to https://trello.com/b/#{ENV['TRELLO_STANDUP_BOARD_ID']} and update your tasks. I'll be picking them up very soon :robot_face:"
+        notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL']
+        notifier.ping "Howdy <!channel>! Go to https://trello.com/b/#{ENV['TRELLO_STANDUP_BOARD_ID']} and update your tasks. I'll be picking them up very soon :robot_face:"
 
       end
 
